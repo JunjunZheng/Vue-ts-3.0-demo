@@ -1,4 +1,3 @@
-//
 <template>
     <div id="app">
         <router-view class="router-view" v-slot="{ Component }">
@@ -20,7 +19,6 @@ export default defineComponent({
             transitionName: 'slide-left'
         })
         router.beforeEach((to: IKeyValue, from: IKeyValue) => {
-            console.log(to.meta, from.meta)
             if (to.meta.index > from.meta.index) {
                 state.transitionName = 'slide-left'
             } else if (to.meta.index < from.meta.index) {
@@ -60,7 +58,6 @@ body {
     bottom: 0;
     margin: 0 auto;
     -webkit-overflow-scrolling: touch;
-    padding-top: 46px;
 }
 .slide-left-enter-active,
 .slide-left-leave-active,

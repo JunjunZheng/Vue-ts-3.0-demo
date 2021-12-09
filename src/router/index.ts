@@ -14,6 +14,14 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/Login/index.vue'),
+        meta: {
+            index: 1
+        }
+    },
+    {
         path: '/detail',
         name: 'detail',
         component: () => import('@/views/Detail/index.vue'),
