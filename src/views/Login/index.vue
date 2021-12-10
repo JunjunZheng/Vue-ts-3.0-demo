@@ -29,10 +29,12 @@
                         name="验证码"
                         label="验证码"
                         placeholder="输入验证码"
-                        :rules="[{ required: true, message: '请填写验证码' }]"
                     >
                         <template #button>
-                            <ImageVerify ref="verifyRef" />
+                            <ImageVerify
+                                ref="verifyRef"
+                                v-bind="tplImageVerify"
+                            />
                         </template>
                     </van-field>
                 </van-cell-group>
@@ -55,10 +57,13 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 import ImageVerify from '@/components/VueImageVerify.vue'
+import md5 from 'js-md5'
+import { Toast } from 'vant'
+import { login, register } from '@/apis/login'
 
-const verifyRef = ref(null)
+const verifyRef = ref()
 const state = reactive({
     type: true,
     username: '',
@@ -69,10 +74,34 @@ const state = reactive({
 const toggle = () => {
     state.type = !state.type
 }
-const onSubmit = () => {
-    console.log('登录')
+const onSubmit = async () => {
+    const { type, username, password, verify } = state
+    const imgCode = verifyRef.value.imgCode
+    if (verify != imgCode) {
+        Toast.fail('验证码错误')
+        return
+    }
+    if (type) {
+        const res = await login({
+            loginName: username,
+            passwordMd5: md5(password)
+        })
+        console.log(res)
+    }
+    // else {
+    //     const res = await register({
+    //         loginName: username,
+    //         password
+    //     })
+    // }
+
+    // console.log(res)
 }
+const tplImageVerify = computed(() => {
+    return { type: state.type }
+})
 </script>
+
 <style lang="scss">
 .login-view {
     &_logo {

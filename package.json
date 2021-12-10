@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "axios": "^0.24.0",
+        "js-md5": "^0.7.3",
         "lib-flexible": "^0.3.2",
         "postcss-pxtorem": "5.1.1",
         "qs": "^6.10.2",

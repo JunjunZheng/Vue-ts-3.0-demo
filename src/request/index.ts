@@ -4,20 +4,25 @@ import { showMessage } from './status'
 import store from '@/store'
 const axios: AxiosInstance = _axios.create({
     timeout: 3000,
-    baseURL: process.env.VUE_APP_BASE_URL + '/api/v1/',
+    baseURL:
+        process.env.VUE_APP_DEV_PROXY_HOST + process.env.VUE_APP_AXIOS_BASEURL,
     headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
     }
 })
 
 // 响应拦截器
 axios.interceptors.response.use(
     (response: AxiosResponse) => {
+        console.log(response)
         if (response.status === 200) {
+            if (response.data.resultCode != 200) {
+                Notify(response.data.message)
+            }
             return response
         } else {
-            showMessage(response.status)
+            Notify(showMessage(response.status))
             return response
         }
     },
@@ -48,3 +53,5 @@ axios.interceptors.request.use(
         return Promise.reject(err.data)
     }
 )
+
+export default axios

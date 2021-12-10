@@ -1,4 +1,6 @@
 export const showMessage = (status: number | string): string => {
+    console.log('status', status)
+
     let message: string | number = ''
     switch (status) {
         case 400:

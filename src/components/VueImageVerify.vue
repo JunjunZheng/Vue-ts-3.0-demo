@@ -8,7 +8,15 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { defineProps, ref, reactive, onMounted } from 'vue'
+import {
+    defineProps,
+    ref,
+    reactive,
+    toRef,
+    onMounted,
+    watch,
+    defineExpose
+} from 'vue'
 
 const props = defineProps({
     width: {
@@ -18,8 +26,12 @@ const props = defineProps({
     height: {
         type: Number,
         default: 30
+    },
+    type: {
+        type: Boolean
     }
 })
+
 const verify = ref()
 const state = reactive({
     pool: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -101,6 +113,15 @@ const handleDraw = () => {
 onMounted(() => {
     state.imgCode = draw()
 })
+
+defineExpose({
+    imgCode: toRef(state, 'imgCode')
+})
+
+watch(
+    () => props.type,
+    () => (state.imgCode = draw())
+)
 </script>
 <style lang="scss">
 .img-verify canvas {
