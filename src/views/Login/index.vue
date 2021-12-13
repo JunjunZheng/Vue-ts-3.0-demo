@@ -58,11 +58,15 @@
 </template>
 <script lang="ts" setup>
 import { reactive, ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import ImageVerify from '@/components/VueImageVerify.vue'
 import md5 from 'js-md5'
 import { Toast } from 'vant'
 import { login, register } from '@/apis/login'
 
+const store = useStore()
+const router = useRouter()
 const verifyRef = ref()
 const state = reactive({
     type: true,
@@ -70,7 +74,6 @@ const state = reactive({
     password: '',
     verify: ''
 })
-
 const toggle = () => {
     state.type = !state.type
 }
@@ -86,14 +89,18 @@ const onSubmit = async () => {
             loginName: username,
             passwordMd5: md5(password)
         })
-        console.log(res)
+        if (res.resultCode !== 200) return
+        store.dispatch('setToken', { token: res.data })
+        router.push({
+            name: 'home'
+        })
+    } else {
+        const res = await register({
+            loginName: username,
+            password
+        })
+        if (res.resultCode == 200) state.type = true
     }
-    // else {
-    //     const res = await register({
-    //         loginName: username,
-    //         password
-    //     })
-    // }
 
     // console.log(res)
 }

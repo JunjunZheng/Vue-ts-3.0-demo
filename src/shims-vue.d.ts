@@ -5,4 +5,10 @@ declare module '*.vue' {
     export default component
 }
 
+declare module 'vue/types/vue' {
+    interface Vue {
+        $filters: IKeyValue
+    }
+}
+
 declare module 'js-md5'

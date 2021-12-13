@@ -15,12 +15,11 @@ const axios: AxiosInstance = _axios.create({
 // 响应拦截器
 axios.interceptors.response.use(
     (response: AxiosResponse) => {
-        console.log(response)
         if (response.status === 200) {
             if (response.data.resultCode != 200) {
                 Notify(response.data.message)
             }
-            return response
+            return response.data
         } else {
             Notify(showMessage(response.status))
             return response

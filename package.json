@@ -14,11 +14,13 @@
         "postcss-pxtorem": "5.1.1",
         "qs": "^6.10.2",
         "register-service-worker": "^1.7.1",
+        "secure-ls": "^1.2.6",
         "vant": "^3.3.6",
         "vue": "^3.0.0",
         "vue-class-component": "^8.0.0-0",
         "vue-router": "4",
-        "vuex": "^4.0.2"
+        "vuex": "^4.0.2",
+        "vuex-persistedstate": "^4.1.0"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^4.18.0",
