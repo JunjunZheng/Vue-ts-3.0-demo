@@ -119,7 +119,7 @@ defineExpose({
 })
 
 watch(
-    () => props.type,
+    () => route.path,
     () => (state.imgCode = draw())
 )
 </script>

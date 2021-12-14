@@ -22,6 +22,30 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
+        path: '/category',
+        name: 'category',
+        component: () => import('@/views/Category/index.vue'),
+        meta: {
+            index: 1
+        }
+    },
+    {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('@/views/Cart/index.vue'),
+        meta: {
+            index: 1
+        }
+    },
+    {
+        path: '/my',
+        name: 'my',
+        component: () => import('@/views/My/index.vue'),
+        meta: {
+            index: 1
+        }
+    },
+    {
         path: '/detail',
         name: 'detail',
         component: () => import('@/views/Detail/index.vue'),

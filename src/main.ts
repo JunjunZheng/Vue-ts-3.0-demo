@@ -7,6 +7,12 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 import '@/assets/style/mixin.scss'
 
+declare module '@vue/runtime-core' {
+    interface ComponentCustomProperties {
+        $filters: any
+    }
+}
+
 const app = createApp(App)
 
 app.config.globalProperties.$filters = {

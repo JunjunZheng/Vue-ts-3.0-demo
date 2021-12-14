@@ -43,22 +43,23 @@ body {
     overflow-y: scroll;
 }
 #app {
-    // height: 100%;
+    height: 100%;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     font-size: 0.43rem;
-    // overflow: auto;
+    overflow: auto;
 }
 .router-view {
     width: 100%;
     height: auto;
     position: absolute;
     top: 0;
-    bottom: 0;
+    left: 0;
     margin: 0 auto;
     -webkit-overflow-scrolling: touch;
+    padding-bottom: 2.13rem;
 }
 .slide-left-enter-active,
 .slide-left-leave-active,

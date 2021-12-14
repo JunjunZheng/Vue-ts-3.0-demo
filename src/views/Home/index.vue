@@ -75,7 +75,8 @@
                         <van-grid :column-num="2">
                             <van-grid-item
                                 v-for="item2 in item.items"
-                                :key="item2.id"
+                                :key="item2.goodsId"
+                                @click="goToDetail(item2.goodsId)"
                             >
                                 <img
                                     class="good-coente-img"
@@ -96,6 +97,7 @@
                     </div>
                 </div>
             </div>
+            <TabBar></TabBar>
         </div>
     </div>
 </template>
@@ -104,6 +106,8 @@
 import { onMounted, onUnmounted, reactive, computed } from 'vue'
 import { useStore } from 'vuex'
 import { indexInfos } from '@/apis/home'
+import TabBar from '@/components/TabBar.vue'
+import router from '@/router'
 const store = useStore()
 const state: IKeyValue = reactive({
     headerScroll: false,
@@ -186,6 +190,7 @@ const handleScroll = () => {
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop
+
     if (scrollTop > 100) {
         state.headerScroll = true
     } else {
@@ -199,6 +204,16 @@ const getIndexInfos = async () => {
     state.indexList = res.data
 }
 
+const goToDetail = (id: string | number) => {
+    console.log(id)
+    router.push({
+        path: '/detail',
+        query: {
+            id
+        }
+    })
+}
+
 onMounted(() => {
     window.addEventListener('scroll', handleScroll, true)
     getIndexInfos()
@@ -210,7 +225,6 @@ onUnmounted(() => {
 
 const tplGoodList = computed(() => {
     return state.goodList.map((item: IKeyValue) => {
-        console.log(item, state.indexList)
         return {
             ...item,
             items: state.indexList[item.key]
@@ -220,7 +234,6 @@ const tplGoodList = computed(() => {
 </script>
 <style lang="scss">
 .home-view {
-    height: 1000px;
     .van-nav-bar {
         background-color: rgba(27, 174, 174, 0);
         transition: all 1s;
@@ -256,6 +269,7 @@ const tplGoodList = computed(() => {
     .home-view__body_swiper {
         height: 4.59rem;
         img {
+            width: 100%;
             height: 4.59rem;
         }
     }
