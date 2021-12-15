@@ -13,7 +13,7 @@
             <van-tabbar-item
                 name="/cart"
                 icon="shopping-cart-o"
-                :badge="!count ? '' : count"
+                :badge="store.state.cartCount"
                 >购物车</van-tabbar-item
             >
             <van-tabbar-item name="/my" icon="user-o">我的</van-tabbar-item>
@@ -21,14 +21,13 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()
 const route = useRoute()
 const router = useRouter()
 const active = ref('/home')
-const count = ref('0')
 
 const onChange = (path: string) => {
     active.value = path
@@ -36,20 +35,15 @@ const onChange = (path: string) => {
         path
     })
 }
-onMounted(() => {
-    const path = route.path
+onMounted(async () => {
     const token = store.state.token
-    console.log(path, token)
-
-    // if (token && ['/category', '/my'].includes(path)) {
-
-    // }
+    if (token) {
+        store.dispatch('getCart')
+    }
 })
-
 watch(
     () => route.path,
-    (newVal, oldVal) => {
-        console.log(newVal, oldVal)
+    (newVal) => {
         active.value = newVal
     },
     {

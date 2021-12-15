@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import store from '@/store'
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -58,6 +59,25 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes
+})
+
+const whiteList: Array<string> = ['login', 'home', 'category']
+
+router.beforeEach((to, from: IKeyValue, next) => {
+    const token = store.state.token
+    if (token) {
+        if (to.name == 'login') {
+            next('/')
+        } else {
+            next()
+        }
+    } else {
+        if (whiteList.includes(to.name as string)) {
+            next()
+        } else {
+            next('/login')
+        }
+    }
 })
 
 export default router

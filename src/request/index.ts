@@ -1,7 +1,9 @@
 import _axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import { Notify } from 'vant'
+import { Notify, Toast } from 'vant'
 import { showMessage } from './status'
 import store from '@/store'
+import router from '@/router'
+
 const axios: AxiosInstance = _axios.create({
     timeout: 3000,
     baseURL:
@@ -16,7 +18,11 @@ const axios: AxiosInstance = _axios.create({
 axios.interceptors.response.use(
     (response: AxiosResponse) => {
         if (response.status === 200) {
-            if (response.data.resultCode != 200) {
+            if (response.data.resultCode === 416) {
+                Toast(response.data.message)
+                store.dispatch('removeToken')
+                router.push('/login')
+            } else if (response.data.resultCode != 200) {
                 Notify(response.data.message)
             }
             return response.data

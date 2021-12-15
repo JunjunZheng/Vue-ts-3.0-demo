@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import SecureLS from 'secure-ls'
+import { getCart } from '@/apis/cart'
 
 const ls = new SecureLS({ isCompression: false })
 
@@ -16,9 +17,11 @@ const PersistPlugin = createPersistedState({
 })
 const state: {
     token: string
+    cartCount: number | string
     caches: IKeyValue
 } = {
     token: '',
+    cartCount: '',
     caches: {}
 }
 export default createStore({
@@ -34,15 +37,21 @@ export default createStore({
         },
         removeToken(state) {
             state.token = ''
+        },
+        getCart(state, payload) {
+            state.cartCount = payload.cartCount
         }
     },
     actions: {
         setToken({ commit }, payload) {
-            console.log('action', payload)
             commit('setToken', payload)
         },
         removeToken({ commit }) {
             commit('removeToken')
+        },
+        getCart({ commit }) {
+            const res = getCart()
+            commit('getCart', { cartCount: res.data.length })
         }
     }
 })
