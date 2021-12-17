@@ -41,6 +41,7 @@ body {
     height: 100%;
     overflow: hidden;
     overflow-y: scroll;
+    overscroll-behavior: none;
 }
 #app {
     height: 100%;
@@ -49,17 +50,17 @@ body {
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     font-size: 0.43rem;
-    overflow-y: scroll;
 }
 .router-view {
     width: 100%;
     height: auto;
     position: absolute;
     top: 0;
-    left: 0;
+    bottom: 0;
     margin: 0 auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 2.13rem;
+    overflow-y: auto;
+    padding-bottom: 1.87rem;
 }
 .slide-left-enter-active,
 .slide-left-leave-active,

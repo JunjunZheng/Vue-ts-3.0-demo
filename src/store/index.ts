@@ -50,8 +50,9 @@ export default createStore({
             commit('removeToken')
         },
         getCart({ commit }) {
-            const res = getCart()
-            commit('getCart', { cartCount: res.data.length })
+            getCart().then((res: IKeyValue) => {
+                commit('getCart', { cartCount: res.data?.length })
+            })
         }
     }
 })

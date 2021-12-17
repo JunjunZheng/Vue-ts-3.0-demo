@@ -53,6 +53,14 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             index: 2
         }
+    },
+    {
+        path: '/product-list',
+        name: 'product-list',
+        component: () => import('@/views/ProductList/index.vue'),
+        meta: {
+            index: 2
+        }
     }
 ]
 
