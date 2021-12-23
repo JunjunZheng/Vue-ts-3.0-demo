@@ -205,7 +205,6 @@ const getIndexInfos = async () => {
 }
 
 const goToDetail = (id: string | number) => {
-    console.log(id)
     router.push({
         path: '/detail',
         query: {
@@ -234,6 +233,7 @@ const tplGoodList = computed(() => {
 </script>
 <style lang="scss">
 .home-view {
+    padding-bottom: 1.33rem;
     .van-nav-bar {
         background-color: rgba(27, 174, 174, 0);
         transition: all 1s;

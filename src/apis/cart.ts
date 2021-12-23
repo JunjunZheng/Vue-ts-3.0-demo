@@ -7,5 +7,5 @@ export function addCart(payload?: IKeyValue): IKeyValue {
 
 // 获取购物车产品
 export function getCart(payload?: IKeyValue): IKeyValue {
-    return axios.get('/shop-cart', { ...payload })
+    return axios.get('/shop-cart', { params: { ...payload } })
 }

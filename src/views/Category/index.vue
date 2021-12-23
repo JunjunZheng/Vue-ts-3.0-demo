@@ -103,6 +103,7 @@ onMounted(async () => {
     height: 100%;
     box-sizing: border-box;
     padding-top: 1.23rem;
+    padding-bottom: 1.33rem;
     overflow: hidden;
     overscroll-behavior: none;
     .category_view__body {

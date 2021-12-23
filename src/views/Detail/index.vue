@@ -67,10 +67,9 @@ import { reactive, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { goodDetail } from '@/apis/detail'
-import { getCart, addCart } from '@/apis/cart'
+import { addCart } from '@/apis/cart'
 
 const store = useStore()
-console.log(store.state)
 
 const route = useRoute()
 const state: IKeyValue = reactive({
@@ -94,7 +93,6 @@ onMounted(async () => {
     const res = await goodDetail({ id })
     state.detailInfo = res.data
     state.swiperList = res.data.goodsCarouselList
-    console.log(res.data)
 })
 </script>
 <style lang="scss">

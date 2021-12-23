@@ -51,3 +51,12 @@ watch(
     }
 )
 </script>
+<style lang="scss">
+.app-tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.33rem;
+}
+</style>
