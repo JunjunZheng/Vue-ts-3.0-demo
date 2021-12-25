@@ -61,6 +61,14 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             index: 2
         }
+    },
+    {
+        path: '/create-order',
+        name: 'create-order',
+        component: () => import('@/views/CreateOrder/index.vue'),
+        meta: {
+            index: 2
+        }
     }
 ]
 

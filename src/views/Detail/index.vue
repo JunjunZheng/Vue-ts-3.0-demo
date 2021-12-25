@@ -45,6 +45,7 @@
                     icon="cart-o"
                     text="购物车"
                     :badge="store.state.cartCount"
+                    @click="goCart"
                 />
                 <van-action-bar-button
                     color="linear-gradient(to right, #25c1c1, #1baeae)"
@@ -64,7 +65,7 @@
 
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { goodDetail } from '@/apis/detail'
 import { addCart } from '@/apis/cart'
@@ -72,6 +73,7 @@ import { addCart } from '@/apis/cart'
 const store = useStore()
 
 const route = useRoute()
+const router = useRouter()
 const state: IKeyValue = reactive({
     swiperList: [],
     detailInfo: {}
@@ -86,6 +88,11 @@ const onAddCart = async (goodsId: number) => {
         goodsId
     }).then(async () => {
         store.dispatch('getCart')
+    })
+}
+const goCart = () => {
+    router.push({
+        name: 'cart'
     })
 }
 onMounted(async () => {
